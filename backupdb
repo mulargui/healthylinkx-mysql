@@ -1,0 +1,2 @@
+# mysqldump -h awsdb.cpcqc8qelwdl.us-west-2.rds.amazonaws.com -P 3306 -u awsdb -pawsawsdb ttrssdb > dump.sql
+mysql -h 127.0.0.1 -u root -pawsawsdb ttrssdb < dump.sql
