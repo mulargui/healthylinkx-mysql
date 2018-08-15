@@ -1,0 +1,5 @@
+
+#innodb_buffer_pool_size = 256M
+innodb_log_file_size = 200M
+
+secure_file_priv = ""
