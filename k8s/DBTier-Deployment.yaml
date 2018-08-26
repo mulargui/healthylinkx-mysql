@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dbtier-deployment
+  labels:
+    app: dbtier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dbtier
+  template:
+    metadata:
+      labels:
+        app: dbtier
+    spec:        
+      containers:
+      - name: mysqldb
+        image: mysql:5.5
+        imagePullPolicy: Never 
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: awsawsdb
+        volumeMounts:
+        - name: dbconfig
+          mountPath: /etc/mysql/conf.d
+      - name: loaddata
+        image: sqlclient
+        imagePullPolicy: Never 
+        volumeMounts:
+        - name: myapp
+          mountPath: /myapp
+      volumes:
+      - name: dbconfig
+        configMap:
+          name: dbconfig
+      - name: myapp
+        hostPath:
+          path: /c/Users/mulargui/cluster/healthylinkx-mysql/mysql.init
+          type: Directory
+          

@@ -50,7 +50,7 @@ if [ "${BUILD}" == "Y" ]; then
 	./$0 CLEAR
 	./$0 CLEANUP
 	sudo docker pull mysql:5.5
-	sudo docker build --rm=true -t sqlclient $REPOPATH/infrastructure
+	sudo docker build --rm=true -t sqlclient $REPOPATH/docker
 fi
 
 # run the container database in the background (including initial data load
@@ -59,9 +59,9 @@ if [ "${RUN}" == "Y" ]; then
 	if [ "$(sudo docker images | grep sqlclient)" == "" ]; then
 		./$0 BUILD
 	fi
-	sudo docker run -d --name MySQLDB -p 3306:3306 -e MYSQL_ROOT_PASSWORD=awsawsdb -v $REPOPATH/custom:/etc/mysql/conf.d mysql:5.5 --secure-file-priv=""
+	sudo docker run -d --name MySQLDB -p 3306:3306 -e MYSQL_ROOT_PASSWORD=awsawsdb -v $REPOPATH/mysql.config:/etc/mysql/conf.d mysql:5.5 --secure-file-priv=""
 	#load initial dataset
-	sudo docker run -d --rm=true --name LOADDB -v $REPOPATH:/myapp --link MySQLDB:MySQLDB sqlclient 
+	sudo docker run -d --rm=true --name LOADDB -v $REPOPATH/mysql.init:/myapp --link MySQLDB:MySQLDB sqlclient 
 	#give extra time to load the data
 	while :
 	do
