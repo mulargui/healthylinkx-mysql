@@ -21,5 +21,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	end
  
 	# provisioning using a shell script
-	config.vm.provision "os", type: "shell", path: "./infrastructure/setup.sh", args: "ALL"
+	config.vm.provision "os", type: "shell", path: "./vm/setup.sh", args: "ALL"
 end
