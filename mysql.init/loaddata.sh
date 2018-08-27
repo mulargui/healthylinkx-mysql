@@ -25,7 +25,7 @@ echo done!
 #k8s: as a shortcut we keep the container dormant
 #we need to redesign this process to work elegantly
 if [ "${KUBERNETES_PORT}" != "" ]; then
-	echo we are using kubernetes!
+	echo we are using k8s!
 	while true; do sleep 3600; done
 fi
 
