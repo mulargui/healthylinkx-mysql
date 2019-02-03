@@ -42,7 +42,7 @@ fi
 # clean up all images
 if [ "${CLEANUP}" == "Y" ]; then
 	./$0 CLEAR
-	sudo docker rmi -f sqlclient mysql
+	sudo docker rmi -f sqlclient mysql:5.5
 fi
 
 # create imageS

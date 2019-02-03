@@ -38,6 +38,6 @@ spec:
           name: dbconfig
       - name: myapp
         hostPath:
-          path: /c/Users/mulargui/cluster/healthylinkx-mysql/mysql.init
+          path: /home/docker/healthylinkx-mysql/mysql.init
           type: Directory
           
