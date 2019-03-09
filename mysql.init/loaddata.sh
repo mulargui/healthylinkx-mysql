@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # docker: containers are linked
 # k8s: always 127.0.0.1 as they are in the same pod
@@ -7,14 +7,17 @@ if [ -z "$sqlhost" ]; then
 	sqlhost="127.0.0.1"
 fi 
 
+#this is a hack for alpine as mysqladmin doesn't work as expected
+sleep 45
+
 #wait till the server is ready
 for i in {1..6}; do # timeout in 30 seconds
-   if mysqladmin ping -h"$sqlhost" --silent; then
-	echo ...ready
-      break
-  fi
-  echo ...waiting
-  sleep 5
+	if mysqladmin ping -h"$sqlhost" --silent; then
+		echo ...ready
+		break
+	fi
+	echo ...waiting
+	sleep 5
 done
 
 if mysql -h $sqlhost -u root -pawsawsdb -e "CREATE DATABASE healthylinkx"; then

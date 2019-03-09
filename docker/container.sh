@@ -81,5 +81,5 @@ if [ "${INTERACTIVE}" == "Y" ]; then
 	if [ "$(sudo docker images | grep sqlclient)" == "" ]; then
 		./$0 BUILD
 	fi
-	sudo docker run -ti -v $REPOPATH:/myapp --name LOADDB --link MySQLDB:MySQLDB sqlclient /bin/bash
+	sudo docker run -ti -v $REPOPATH:/myapp --name LOADDB --link MySQLDB:MySQLDB sqlclient /bin/sh
 fi
